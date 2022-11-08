@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  price: 1.5
+  schedule: 2022-11-07 23:42:18
+  duration: 
+  online: 
+  origin: MyString
+  available: 
+  active: 
+
+two:
+  price: 1.5
+  schedule: 2022-11-07 23:42:18
+  duration: 
+  online: 
+  origin: MyString
+  available: 
+  active: 

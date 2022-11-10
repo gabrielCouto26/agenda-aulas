@@ -3,11 +3,11 @@ class CreateClassDetails < ActiveRecord::Migration[5.2]
     create_table :class_details do |t|
       t.float :price
       t.datetime :schedule
-      t.int :duration
-      t.bool :online
+      t.integer :duration
+      t.boolean :online
       t.string :origin
-      t.bool :available
-      t.bool :active
+      t.boolean :available
+      t.boolean :active
 
       t.timestamps
     end

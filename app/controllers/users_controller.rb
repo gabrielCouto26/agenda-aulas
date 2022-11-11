@@ -43,7 +43,7 @@ class UsersController < ApplicationController
         render json: { status: 500, data: "Falha ao editar usuário" }
       end
     else
-      render json: { status: 404, data: "Usuário não encontraedo" }
+      render json: { status: 404, data: "Usuário não encontrado" }
     end
   end
   
@@ -59,7 +59,7 @@ class UsersController < ApplicationController
         render json: { status: 500, data: "Falha ao remover usuário" }
       end
     else
-      render json: { status: 404, data: "Usuário não encontraedo" }
+      render json: { status: 404, data: "Usuário não encontrado" }
     end
   end
 

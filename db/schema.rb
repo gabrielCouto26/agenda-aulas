@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_10_045014) do
+ActiveRecord::Schema.define(version: 2022_11_11_190824) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.string "country"
@@ -30,8 +30,10 @@ ActiveRecord::Schema.define(version: 2022_11_10_045014) do
     t.string "origin"
     t.boolean "available"
     t.boolean "active"
+    t.bigint "classroom_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["classroom_id"], name: "index_class_details_on_classroom_id"
   end
 
   create_table "classrooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
@@ -86,6 +88,7 @@ ActiveRecord::Schema.define(version: 2022_11_10_045014) do
   end
 
   add_foreign_key "addresses", "users"
+  add_foreign_key "class_details", "classrooms"
   add_foreign_key "classrooms", "subjects"
   add_foreign_key "classrooms", "teachers"
   add_foreign_key "profiles", "users"

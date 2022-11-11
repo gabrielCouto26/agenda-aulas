@@ -8,6 +8,7 @@ class CreateClassDetails < ActiveRecord::Migration[5.2]
       t.string :origin
       t.boolean :available
       t.boolean :active
+      t.references :classroom, foreign_key: true
 
       t.timestamps
     end

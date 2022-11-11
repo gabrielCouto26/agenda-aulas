@@ -34,6 +34,15 @@ ActiveRecord::Schema.define(version: 2022_11_10_045014) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "classrooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+    t.bigint "teacher_id"
+    t.bigint "subject_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subject_id"], name: "index_classrooms_on_subject_id"
+    t.index ["teacher_id"], name: "index_classrooms_on_teacher_id"
+  end
+
   create_table "profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.integer "_type"
     t.bigint "user_id"
@@ -45,15 +54,6 @@ ActiveRecord::Schema.define(version: 2022_11_10_045014) do
   create_table "students", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "subject_class", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
-    t.bigint "teacher_id"
-    t.bigint "subject_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["subject_id"], name: "index_subject_class_on_subject_id"
-    t.index ["teacher_id"], name: "index_subject_class_on_teacher_id"
   end
 
   create_table "subjects", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 2022_11_10_045014) do
   end
 
   add_foreign_key "addresses", "users"
+  add_foreign_key "classrooms", "subjects"
+  add_foreign_key "classrooms", "teachers"
   add_foreign_key "profiles", "users"
-  add_foreign_key "subject_class", "subjects"
-  add_foreign_key "subject_class", "teachers"
 end

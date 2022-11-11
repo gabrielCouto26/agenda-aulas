@@ -1,3 +1,3 @@
 class ClassDetail < ApplicationRecord
-  belongs_to :classrooms
+  belongs_to :classroom
 end

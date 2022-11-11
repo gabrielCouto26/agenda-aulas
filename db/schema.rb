@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 2022_11_10_045014) do
   end
 
   create_table "students", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+    t.string "formation_level"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -65,9 +66,10 @@ ActiveRecord::Schema.define(version: 2022_11_10_045014) do
   end
 
   create_table "teachers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
-    t.date "teacher_since"
+    t.string "formation_level"
     t.string "domain"
     t.text "experience"
+    t.date "teacher_since"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   resources :addresses
   resources :teachers
   resources :students
+  resources :subjects
 end

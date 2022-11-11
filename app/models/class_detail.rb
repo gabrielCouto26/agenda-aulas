@@ -1,3 +1,3 @@
 class ClassDetail < ApplicationRecord
-  belongs_to :subject_classes
+  belongs_to :classrooms
 end

@@ -1,3 +1,3 @@
 class Subject < ApplicationRecord
-  has_many :subject_classes
+  has_many :classrooms
 end

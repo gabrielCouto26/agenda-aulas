@@ -12,10 +12,10 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = User.where(id: params[:id])
+    @user = User.where(id: params[:id]).first
 
-    if @user.any?
-      render json: { status: 200, data: @user.first }
+    if @user.present?
+      render json: { status: 200, data: @user }
     else
       render json: { status: 404, data: "Usuário não encontrado" }
     end
@@ -32,13 +32,13 @@ class UsersController < ApplicationController
   end
   
   def update
-    @user = User.where(id: params[:id])
+    @user = User.where(id: params[:id]).first
     
-    if @user.any?
-      @user.first.update(user_params)
+    if @user.present?
+      @user.update(user_params)
       
-      if @user.first.save
-        render json: { status: 200, data: @user.first }
+      if @user.save
+        render json: { status: 200, data: @user }
       else 
         render json: { status: 500, data: "Falha ao editar usuário" }
       end
@@ -48,12 +48,12 @@ class UsersController < ApplicationController
   end
   
   def destroy
-    @user = User.where(id: params[:id])
+    @user = User.where(id: params[:id]).first
 
-    if @user.any?
-      @user.first.destroy
+    if @user.present?
+      @user.destroy
       
-      if @user.first.destroyed?
+      if @user.destroyed?
         render json: { status: 204, data: nil }
       else 
         render json: { status: 500, data: "Falha ao remover usuário" }

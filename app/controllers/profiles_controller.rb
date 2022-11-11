@@ -12,10 +12,10 @@ class ProfilesController < ApplicationController
   end
   
   def show
-    @profile = Profile.where(id: params[:id])
+    @profile = Profile.where(id: params[:id]).first
 
-    if @profile.any?
-      render json: { status: 200, data: @profile.first }
+    if @profile.present?
+      render json: { status: 200, data: @profile }
     else
       render json: { status: 404, data: "Perfil não encontrado" }
     end
@@ -32,13 +32,13 @@ class ProfilesController < ApplicationController
   end
   
   def update
-    @profile = Profile.where(id: params[:id])
+    @profile = Profile.where(id: params[:id]).first
     
-    if @profile.any?
-      @profile.first.update(profile_params)
+    if @profile.present?
+      @profile.update(profile_params)
       
-      if @profile.first.save
-        render json: { status: 200, data: @profile.first }
+      if @profile.save
+        render json: { status: 200, data: @profile }
       else 
         render json: { status: 500, data: "Falha ao editar perfil" }
       end
@@ -48,12 +48,12 @@ class ProfilesController < ApplicationController
   end
   
   def destroy
-    @profile = Profile.where(id: params[:id])
+    @profile = Profile.where(id: params[:id]).first
 
-    if @profile.any?
-      @profile.first.destroy
+    if @profile.present?
+      @profile.destroy
       
-      if @profile.first.destroyed?
+      if @profile.destroyed?
         render json: { status: 204, data: nil }
       else 
         render json: { status: 500, data: "Falha ao remover perfil" }

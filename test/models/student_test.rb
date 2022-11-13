@@ -43,12 +43,34 @@ class StudentTest < ActiveSupport::TestCase
     assert student.destroyed?
   end
 
+  test "student has many classrooms" do
+    user = create_user
+    student = Student.create(
+      user_id: user.id
+    )
+    subject = create_subject
+    student.classrooms.create(
+      subject_id: subject.id
+    )
+    student.classrooms.create(
+      subject_id: subject.id
+    )
+
+    assert_not_empty student.classrooms
+    assert_equal 2, student.classrooms.size
+  end
+
   def create_user
     User.create(
       name: "gabriel",
       email: "gabriel@email.com",
       password: "1234",
       birth_date: "26/09/1996"
+    )
+  end
+  def create_subject
+    Subject.create(
+      name: "História"
     )
   end
 end

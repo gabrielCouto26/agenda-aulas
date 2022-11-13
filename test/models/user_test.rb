@@ -50,4 +50,45 @@ class UserTest < ActiveSupport::TestCase
     user.destroy
     assert user.destroyed?
   end
+
+  test "user has one profile" do
+    user = User.create(
+      name: "gabriel",
+      email: "gabriel@email.com",
+      password: "1234",
+      birth_date: "26/09/1996"
+    )
+    user.profile.create!
+
+    assert Profile.find_by(user_id: user.id)
+  end
+
+  test "user has one teacher and one student" do
+    user = User.create(
+      name: "gabriel",
+      email: "gabriel@email.com",
+      password: "1234",
+      birth_date: "26/09/1996"
+    )
+    Teacher.create!(user_id: user.id)
+    Student.create!(user_id: user.id)
+
+    assert user.teacher.save
+    assert user.student.save
+
+    assert Teacher.find_by(user_id: user.id)
+    assert Student.find_by(user_id: user.id)
+  end
+
+  test "user has one address" do
+    user = User.create(
+      name: "gabriel",
+      email: "gabriel@email.com",
+      password: "1234",
+      birth_date: "26/09/1996"
+    )
+    Address.create!(user_id: user.id)
+
+    assert Address.find_by(user_id: user.id)
+  end
 end

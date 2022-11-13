@@ -45,6 +45,18 @@ class ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_equal teacher.id, JSON.parse(@response.body)["data"]["teacher_id"]
   end
 
+  test "student can create classroom" do
+    student = create_student
+    subject = create_subject
+    post "/students/#{student.id}/classrooms", params: {
+      classroom: {
+        subject_id: subject.id
+      }
+    }
+    assert_response :success
+    assert_not_nil student.classrooms.where(id: 1)
+  end
+
   # test "update" do
   #   teacher = create_teacher
   #   subject = create_subject
@@ -82,6 +94,17 @@ class ClassroomsControllerTest < ActionDispatch::IntegrationTest
       birth_date: "26/09/1996"
     )
     Teacher.create(
+      user_id: user.id
+    )
+  end
+  def create_student
+    user = User.create(
+      name: "gabriel",
+      email: "gabriel@email.com",
+      password: "1234",
+      birth_date: "26/09/1996"
+    )
+    Student.create(
       user_id: user.id
     )
   end

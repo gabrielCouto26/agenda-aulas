@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   resources :profiles
   resources :addresses
   resources :teachers
-  resources :students
+  resources :students do
+    resources :classrooms, only: [:index, :create, :destroy]
+  end
   resources :subjects
   resources :classrooms
   resources :class_details

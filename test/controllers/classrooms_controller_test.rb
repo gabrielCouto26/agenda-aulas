@@ -54,7 +54,19 @@ class ClassroomsControllerTest < ActionDispatch::IntegrationTest
       }
     }
     assert_response :success
-    assert_not_nil student.classrooms.where(id: 1)
+    assert_not_nil student.classrooms.where(id: student.id)
+  end
+
+  test "teacher can create classroom" do
+    teacher = create_student
+    subject = create_subject
+    post "/teachers/#{teacher.id}/classrooms", params: {
+      classroom: {
+        subject_id: subject.id
+      }
+    }
+    assert_response :success
+    assert_not_nil teacher.classrooms.where(id: teacher.id)
   end
 
   # test "update" do

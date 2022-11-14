@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   resources :users
   resources :profiles
   resources :addresses
-  resources :teachers
+  resources :teachers do
+    resources :classrooms, only: [:index, :create, :destroy]
+  end
   resources :students do
     resources :classrooms, only: [:index, :create, :destroy]
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_13_050632) do
+ActiveRecord::Schema.define(version: 2022_11_15_200236) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.string "country"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2022_11_13_050632) do
     t.bigint "subject_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
     t.index ["subject_id"], name: "index_classrooms_on_subject_id"
     t.index ["teacher_id"], name: "index_classrooms_on_teacher_id"
   end

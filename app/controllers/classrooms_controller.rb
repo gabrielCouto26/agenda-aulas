@@ -32,8 +32,8 @@ class ClassroomsController < ApplicationController
   
   def create
     if params[:student_id] or params[:teacher_id]
-      student_create(params[:student_id], classrooms_params[:subject_id]) if params[:student_id]
-      teacher_create(params[:teacher_id], classrooms_params[:subject_id]) if params[:teacher_id]
+      student_create(params[:student_id], classrooms_params) if params[:student_id]
+      teacher_create(params[:teacher_id], classrooms_params) if params[:teacher_id]
     else
       @classroom = Classroom.create(classrooms_params)
 
@@ -99,13 +99,15 @@ class ClassroomsController < ApplicationController
   private
 
     def classrooms_params
-      params.require(:classroom).permit(:teacher_id, :subject_id, :student_id)
+      params.require(:classroom).permit(:teacher_id, :subject_id, :student_id, :name)
     end
 
-    def student_create(id, subject_id)
+    def student_create(id, classrooms_params)
       student = Student.where(id: id).first
       if student.present?
-        @classroom = student.classrooms.create!(subject_id: subject_id)
+        @classroom = student.classrooms.create!(
+          subject_id: classrooms_params[:subject_id],
+          name: classrooms_params[:name])
         render json: { status: 200, data: @classroom }
       else
         render json: { status: 404, data: "Aluno não encontrado" }
@@ -115,7 +117,9 @@ class ClassroomsController < ApplicationController
     def teacher_create(id, subject_id)
       teacher = Teacher.where(id: id).first
       if teacher.present?
-        @classroom = teacher.classrooms.create!(subject_id: subject_id)
+        @classroom = teacher.classrooms.create!(
+          subject_id: classrooms_params[:subject_id],
+          name: classrooms_params[:name])
         render json: { status: 200, data: @classroom }
       else
         render json: { status: 404, data: "Professor não encontrado" }

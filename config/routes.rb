@@ -11,4 +11,6 @@ Rails.application.routes.draw do
   resources :subjects
   resources :classrooms
   resources :class_details
+
+  post '/login', to: 'auth#login'
 end

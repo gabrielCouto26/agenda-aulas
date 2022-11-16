@@ -2,26 +2,26 @@ class DashboardController < ApplicationController
   skip_before_action :verify_authenticity_token  
 
   def index
-    # Lista de classes ativas (class_details available: true )
-    available_ids = ClassDetail.where(available: true)
-    available_ids.each do |id|
-      @available_classes << Classroom.find(id)
+    @available = []
+    @requested = []
+
+    available_classes = ClassDetail.where(available: true).order(created_at: :desc)
+    available_classes.each do |c|
+      @available << Classroom.find(c.classroom_id)
     end
     
-    # Lista de classes desejadas (class_details origin: requested )
-    requested_ids = ClassDetail.where(origin: "requested")
-    requested_ids.each do |id|
-      @requested_classes << Classroom.find(id)
+    requested_classes = ClassDetail.where(origin: "requested").order(created_at: :desc)
+    requested_classes.each do |c|
+      @requested << Classroom.find(c.classroom_id)
     end
     
-    # Lista de topicos (subject all order by name desc)
     @subjects = Subject.order(name: :asc)
 
     render json: { 
       status: 200,
       data: {
-        available: @available_classes,
-        requested: @requested_classes,
+        available: @available,
+        requested: @requested,
         subjects: @subjects,
       }
     }

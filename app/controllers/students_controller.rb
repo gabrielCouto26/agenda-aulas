@@ -20,6 +20,16 @@ class StudentsController < ApplicationController
       render json: { status: 404, data: "Aluno não encontrado" }
     end
   end
+
+  def show_by_user
+    @student = Student.where(user_id: params[:user_id]).first
+
+    if @student.present?
+      render json: { status: 200, data: @student }
+    else
+      render json: { status: 404, data: "Aluno não encontrado" }
+    end
+  end
   
   def create
     @student = Student.create(students_params)

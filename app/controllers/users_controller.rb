@@ -23,6 +23,7 @@ class UsersController < ApplicationController
   
   def create
     @user = User.create(user_params)
+    @user.profile.create(profile_params)
 
     if @user.save
       render json: { status: 200, data: @user }
@@ -67,5 +68,9 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :email, :password, :birth_date)
+    end
+
+    def profile_params
+      params.require(:profile).permit(:_type)
     end
 end

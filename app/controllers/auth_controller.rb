@@ -8,7 +8,7 @@ class AuthController < ApplicationController
     if user.present?
       correct_pass = user.password == password
       if correct_pass
-        render json: { status: 204, data: nil }
+        render json: { status: 204, data: { user_id: user.id } }
       else
         render json: { status: 401, data: "Senha incorreta" }
       end

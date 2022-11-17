@@ -13,5 +13,5 @@ Rails.application.routes.draw do
   resources :class_details
 
   post '/login', to: 'auth#login'
-  get '/dashboard', to: 'dashboard#index'
+  post '/dashboard', to: 'dashboard#index'
 end

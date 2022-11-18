@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2022_11_13_050632) do
   create_table "class_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.datetime "start_date"
     t.float "price"
+    t.string "origin"
     t.integer "class_duration"
     t.integer "end_expectation"
     t.boolean "online"

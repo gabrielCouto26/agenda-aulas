@@ -3,6 +3,7 @@ class CreateClassDetails < ActiveRecord::Migration[5.2]
     create_table :class_details do |t|
       t.datetime :start_date
       t.float :price
+      t.string :origin
       t.integer :class_duration
       t.integer :end_expectation
       t.boolean :online

@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_15_200236) do
+ActiveRecord::Schema.define(version: 2022_11_13_050632) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
-    t.string "country"
+    t.string "country", null: false
     t.string "state"
     t.string "city"
     t.bigint "user_id"
@@ -23,13 +23,12 @@ ActiveRecord::Schema.define(version: 2022_11_15_200236) do
   end
 
   create_table "class_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+    t.datetime "start_date"
     t.float "price"
-    t.datetime "schedule"
-    t.integer "duration"
+    t.integer "class_duration"
+    t.integer "end_expectation"
     t.boolean "online"
-    t.string "origin"
     t.boolean "available"
-    t.boolean "active"
     t.bigint "classroom_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -37,11 +36,11 @@ ActiveRecord::Schema.define(version: 2022_11_15_200236) do
   end
 
   create_table "classrooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+    t.string "name", null: false
     t.bigint "teacher_id"
     t.bigint "subject_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
     t.index ["subject_id"], name: "index_classrooms_on_subject_id"
     t.index ["teacher_id"], name: "index_classrooms_on_teacher_id"
   end
@@ -54,7 +53,7 @@ ActiveRecord::Schema.define(version: 2022_11_15_200236) do
   end
 
   create_table "profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
-    t.integer "_type"
+    t.integer "_type", null: false
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -70,14 +69,14 @@ ActiveRecord::Schema.define(version: 2022_11_15_200236) do
   end
 
   create_table "subjects", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "teachers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.string "formation_level"
-    t.string "domain"
+    t.string "domain", null: false
     t.text "experience"
     t.date "teacher_since"
     t.bigint "user_id"
@@ -87,9 +86,9 @@ ActiveRecord::Schema.define(version: 2022_11_15_200236) do
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.string "password"
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "password", null: false
     t.date "birth_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

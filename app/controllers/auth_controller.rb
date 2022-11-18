@@ -8,7 +8,10 @@ class AuthController < ApplicationController
     if user.present?
       correct_pass = user.password == password
       if correct_pass
-        render json: { status: 204, data: { user_id: user.id } }
+        render json: { status: 204, data: { 
+          user_id: user.id,
+          profile_type: user.profile.id
+        } }
       else
         render json: { status: 401, data: "Senha incorreta" }
       end
@@ -20,6 +23,6 @@ class AuthController < ApplicationController
   private
 
   def auth_params
-    params.require(:auth).permit(:email, :password, :profileType)
+    params.require(:auth).permit(:email, :password)
   end
 end

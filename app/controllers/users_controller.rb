@@ -23,9 +23,9 @@ class UsersController < ApplicationController
   
   def create
     @user = User.create(user_params)
-    @user.profile.create(profile_params)
+    @profile = Profile.create(_type: profile_params[:_type], user_id: @user.id)
 
-    if @user.save
+    if @user.save and @profile.save
       render json: { status: 200, data: @user }
     else 
       render json: { status: 500, data: "Falha ao cadastrar usuário" }

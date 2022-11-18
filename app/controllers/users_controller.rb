@@ -22,13 +22,18 @@ class UsersController < ApplicationController
   end
   
   def create
-    @user = User.create(user_params)
-    @profile = Profile.create(_type: profile_params[:_type], user_id: @user.id)
+    user = User.where(email: user_params[:email]).first
+    if user.present?
+      render json: { status: 401, data: "Email já cadastrado" }
+    else
+      @user = User.create(user_params)
+      @profile = Profile.create(_type: profile_params[:_type], user_id: @user.id)
 
-    if @user.save and @profile.save
-      render json: { status: 200, data: @user }
-    else 
-      render json: { status: 500, data: "Falha ao cadastrar usuário" }
+      if @user.save and @profile.save
+        render json: { status: 200, data: @user }
+      else 
+        render json: { status: 500, data: "Falha ao cadastrar usuário" }
+      end
     end
   end
   

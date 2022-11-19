@@ -76,6 +76,6 @@ class ClassDetailsController < ApplicationController
   private
 
     def class_details_params
-      params.require(:class_detail).permit(:price, :schedule, :duration, :online, :origin, :available, :active, :classroom_id)
+      params.require(:class_detail).permit(:start_date, :price, :origin, :class_duration, :end_expectation, :online, :available, :classroom_id)
     end
 end

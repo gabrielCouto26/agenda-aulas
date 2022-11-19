@@ -16,4 +16,5 @@ Rails.application.routes.draw do
   post '/dashboard', to: 'dashboard#index'
 
   get '/students/user/:user_id', to: 'students#show_by_user'
+  get '/teachers/user/:user_id', to: 'teachers#show_by_user'
 end

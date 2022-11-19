@@ -20,6 +20,17 @@ class TeachersController < ApplicationController
       render json: { status: 404, data: "Professor não encontrado" }
     end
   end
+
+  def show_by_user
+    @teacher = Teacher.where(user_id: params[:user_id]).first
+
+    if @teacher.present?
+      render json: { status: 200, data: @teacher }
+    else
+      render json: { status: 404, data: "Aluno não encontrado" }
+    end
+  end
+  
   
   def create
     @teacher = Teacher.create(teachers_params)

@@ -10,7 +10,7 @@ class AuthController < ApplicationController
       if correct_pass
         render json: { status: 204, data: { 
           user_id: user.id,
-          profile_type: user.profile.id
+          profile_type: user.profile._type
         } }
       else
         render json: { status: 401, data: "Senha incorreta" }

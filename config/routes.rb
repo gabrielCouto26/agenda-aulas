@@ -17,4 +17,5 @@ Rails.application.routes.draw do
 
   get '/students/user/:user_id', to: 'students#show_by_user'
   get '/teachers/user/:user_id', to: 'teachers#show_by_user'
+  get '/class_details/classroom/:classroom_id', to: 'class_details#show_by_classroom'
 end

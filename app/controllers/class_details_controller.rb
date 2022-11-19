@@ -20,6 +20,16 @@ class ClassDetailsController < ApplicationController
       render json: { status: 404, data: "Detalhes da classe não encontrado" }
     end
   end
+
+  def show_by_classroom
+    @class_detail = ClassDetail.where(classroom_id: params[:classroom_id]).first
+
+    if @class_detail.present?
+      render json: { status: 200, data: @class_detail }
+    else
+      render json: { status: 404, data: "Detalhes da classe não encontrado" }
+    end
+  end
   
   def create
     @class_detail = ClassDetail.create(class_details_params)

@@ -24,9 +24,9 @@ class DashboardController < ApplicationController
         @available << Classroom.find(c.classroom_id)
       end
   
-      requested_classes = ClassDetail.where(origin: "offered").order(created_at: :desc)
+      requested_classes = ClassDetail.where(origin: "requested", available: false).order(created_at: :desc)
       requested_classes.each do |c|
-        @requested = Teacher.find_by(user_id: dashboard_params[:user_id]).classrooms.where(id: c.classroom_id)
+        @requested = Classroom.where(id: c.classroom_id, teacher_id: nil)
       end
       
       @subjects = Subject.order(name: :asc)
@@ -47,10 +47,12 @@ class DashboardController < ApplicationController
         @available << Classroom.find(c.classroom_id)
       end
   
+      temp = []
       requested_classes = ClassDetail.where(origin: "requested").order(created_at: :desc)
       requested_classes.each do |c|
-        @requested = Student.find_by(user_id: dashboard_params[:user_id]).classrooms.where(id: c.classroom_id)
+        temp << Student.find_by(user_id: dashboard_params[:user_id]).classrooms.where(id: c.classroom_id)
       end
+      @requested = temp.flatten
       
       @subjects = Subject.order(name: :asc)
   

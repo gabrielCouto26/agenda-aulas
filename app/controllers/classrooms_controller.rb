@@ -14,6 +14,22 @@ class ClassroomsController < ApplicationController
       end
     end
   end
+
+  def list_students
+    @classroom = Classroom.where(id: params[:classroom_id]).first
+
+    if @classroom.present?
+      students = []
+      if @classroom.students.any?
+        @classroom.students.each do |s|
+          students << {id: s.id, name: s.user.name}
+        end
+      end
+      render json: { status: 200, data: students }
+    else
+      render json: { status: 404, data: "Classe não encontrado" }
+    end
+  end
   
   def show
     @classroom = Classroom.where(id: params[:id]).first
@@ -44,8 +60,13 @@ class ClassroomsController < ApplicationController
     @classroom = Classroom.where(id: params[:id]).first
     
     if @classroom.present?
-      @classroom.update(classrooms_params)
-      
+      if params[:student_id].present?
+        student = Student.find(params[:student_id])
+        @classroom.students << student
+      else
+        @classroom.update(classrooms_params)
+      end
+
       if @classroom.save
         render json: { status: 200, data: @classroom }
       else 

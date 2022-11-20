@@ -9,7 +9,9 @@ Rails.application.routes.draw do
     resources :classrooms, only: [:index, :create, :destroy]
   end
   resources :subjects
-  resources :classrooms
+  resources :classrooms do
+    get '/students', to: 'classrooms#list_students'
+  end
   resources :class_details
 
   post '/login', to: 'auth#login'

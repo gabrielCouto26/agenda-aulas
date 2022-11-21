@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   resources :students do
     resources :classrooms, only: [:index, :create, :destroy]
   end
-  resources :subjects
+  resources :subjects do
+    get '/classrooms', to: 'subjects#list_classrooms'
+  end
   resources :classrooms do
     get '/students', to: 'classrooms#list_students'
   end

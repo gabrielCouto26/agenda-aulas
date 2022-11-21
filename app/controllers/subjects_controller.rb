@@ -20,6 +20,22 @@ class SubjectsController < ApplicationController
       render json: { status: 404, data: "Tópico não encontrado" }
     end
   end
+
+  def list_classrooms
+    @subject = Subject.where(id: params[:subject_id]).first
+
+    if @subject.present?
+      classrooms = []
+      if @subject.classrooms.any?
+        @subject.classrooms.each do |c|
+          classrooms << {id: c.id, name: c.name}
+        end
+      end
+      render json: { status: 200, data: classrooms }
+    else
+      render json: { status: 404, data: "Tópico não encontrado" }
+    end
+  end
   
   def create
     @subject = Subject.create(subjects_params)

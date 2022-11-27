@@ -1,24 +1,24 @@
-# README
+# Agenda Aulas
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## MVP do projeto de semestre da faculdade
 
-Things you may want to cover:
+<br />
 
-* Ruby version
+### Instalação
 
-* System dependencies
+* Instale o `Ruby v2.7.5`
+  
+* Instale o `mysql2`
 
-* Configuration
+* Execute o comando `bundle install`
 
-* Database creation
 
-* Database initialization
+* Execute o comando `rails db:create`
+  
+* Execute o comando `rails db:migration`
 
-* How to run the test suite
+<br />
 
-* Services (job queues, cache servers, search engines, etc.)
+### Rodando o projeto
 
-* Deployment instructions
-
-* ...
+* Execute o comando `rails s`

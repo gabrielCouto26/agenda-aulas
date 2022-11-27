@@ -2,8 +2,6 @@
 
 ## MVP do projeto de semestre da faculdade
 
-<br />
-
 ### Instalação
 
 * Instale o `Ruby v2.7.5`
